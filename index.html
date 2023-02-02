@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spanish ID generator</title>
+</head>
+
+<body>
+    <p>¿Cuántos DNIs quieres?</p>
+    <form>
+        <input type="number">
+        <button>Generar</button>
+        <span></span>
+    </form>
+    <table></table>
+    <script>
+        const form = document.querySelector('form');
+        const table = document.querySelector('table');
+        const input = document.querySelector('input');
+        const span = document.querySelector('span');
+        form.addEventListener('submit', (event) => {
+            event.preventDefault();
+            span.textContent = 'ahí lo llevas';
+            table.innerHTML = '';
+            const number = input.value;
+            for (let i = 0; i < number; i++) {
+                const tr = document.createElement('tr');
+                const td = document.createElement('td');
+                td.textContent = generateDNI();
+                tr.appendChild(td);
+                table.appendChild(tr);
+            }
+        });
+        function generateDNI() {
+            const letters = 'TRWAGMYFPDXBNJZSQVHLCKE';
+            const number = Math.floor(Math.random() * 100000000);
+            const letter = letters[number % 23];
+            return `${number}${letter}`;
+        }
+    </script>
+</body>
+
+</html>
